@@ -30,11 +30,11 @@ class MediaItem extends React.Component {
   }
 
   render() {
-    const {itemValue, itemURL, ID, handleVideoURLChange} = this.props
+    const {itemValue, itemURL, handleVideoURLChange} = this.props
     const {showLoader, children} = this.state
     console.log("children", children)
     return (
-      <s.Li ID={ID}>
+      <s.Li>
         <p onClick={this.handleMediaItemClick}>{itemValue}</p> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
         {children ? <MediaList mediaListNodes={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
         {showLoader ? <ul><Loader forComp="mediaItem"/></ul> : null}

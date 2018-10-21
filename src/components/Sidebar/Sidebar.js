@@ -3,6 +3,8 @@ import MediaList from './MediaList/MediaList'
 import * as s from './style';
 import Loader from '../Loader/Loader'
 import * as utils from '../../utils'
+import * as common from '../common/comps'
+import HamburgerSVG from '../../assets/hamburger.svg'
 
 
 class Sidebar extends React.Component {
@@ -14,7 +16,7 @@ class Sidebar extends React.Component {
   componentWillMount = async() => {
     let html
     try {
-      html = await utils.FetchHtml(this.baseURL)
+      html = await utils.FetchHtml(this.baseURL, 0)
     } catch (error) {
       alert(error)
       return
@@ -25,15 +27,19 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const {handleVideoURLChange} = this.props
+    const {handleVideoURLChange, showSidebar, handleMediaListRevealer} = this.props
     const {mediaListNodes} = this.state
     const showLoader = this.state.mediaListNodes === null
     return (
-      <s.MediaListContainer showLoader={showLoader} >
+      <s.MediaListContainer showSidebar={showSidebar}>
         { 
           showLoader
           ? <Loader />
-          : <MediaList baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
+          : 
+            <s.MediaListWrapper>
+              <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleMediaListRevealer} />
+              <MediaList baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
+            </s.MediaListWrapper>
         }
       </s.MediaListContainer>
     );  

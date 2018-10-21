@@ -13,11 +13,11 @@ class MediaList extends React.Component {
         {
           mediaListNodes.map((node, idx) => {
             const itemValue = node.innerText
-            console.log("in media list, itemValue: ", itemValue)
             const itemURL = `${baseURL}${itemValue}`
+            console.log("in media list, itemValue: ", itemValue)
             console.log("in media list, baseURL: ", baseURL)
             console.log("in media list, itemURL: ", itemURL)
-            return <MediaItem key={itemValue+idx} ID={idx} itemValue={itemValue} itemURL={itemURL} handleVideoURLChange={handleVideoURLChange}/>
+            return <MediaItem key={itemValue+idx} itemValue={itemValue} itemURL={itemURL} handleVideoURLChange={handleVideoURLChange}/>
           })
         }
       </s.UnList>

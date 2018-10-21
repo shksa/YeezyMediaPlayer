@@ -6,21 +6,27 @@ import * as utils from '../utils';
 
 class App extends Component {
 
-  state = {videoURL: utils.DefaultVid}
+  state = {videoURL: utils.DefaultVid, showSidebar: true}
 
   
   handleVideoURLChange = (videoURL) => {
     console.log("videoURL", videoURL)
-    this.setState({videoURL})
+    this.setState({videoURL, showSidebar: false})
+  }
+
+  handleMediaListRevealer = () => {
+    this.setState((state) => ({
+      showSidebar: !state.showSidebar
+    }))
   }
 
   render() {
     console.log("In render of App, state: ", this.state)
-    const {videoURL} = this.state
+    const {videoURL, showSidebar} = this.state
     return (
       <s.App>
-        <Sidebar handleVideoURLChange={this.handleVideoURLChange}/>
-        <MediaViewer videoURL={videoURL} handleVideoURLChange={this.handleVideoURLChange} />
+        <Sidebar showSidebar={showSidebar} handleVideoURLChange={this.handleVideoURLChange} handleMediaListRevealer={this.handleMediaListRevealer}/>
+        <MediaViewer isSidebarOpen={showSidebar} videoURL={videoURL} handleVideoURLChange={this.handleVideoURLChange} handleMediaListRevealer={this.handleMediaListRevealer}  />
       </s.App>
     );
   }
