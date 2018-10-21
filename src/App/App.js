@@ -11,13 +11,19 @@ class App extends Component {
   
   handleVideoURLChange = (videoURL) => {
     console.log("videoURL", videoURL)
-    this.setState({videoURL, showSidebar: false})
+    this.setState({videoURL})
   }
 
-  handleMediaListRevealer = () => {
+  handleHamburgerClick = () => {
     this.setState((state) => ({
       showSidebar: !state.showSidebar
     }))
+  }
+
+  handleSidebarVisibilty = (boolean) => {
+    this.setState({
+      showSidebar: boolean
+    })
   }
 
   render() {
@@ -25,8 +31,8 @@ class App extends Component {
     const {videoURL, showSidebar} = this.state
     return (
       <s.App>
-        <Sidebar showSidebar={showSidebar} handleVideoURLChange={this.handleVideoURLChange} handleMediaListRevealer={this.handleMediaListRevealer}/>
-        <MediaViewer isSidebarOpen={showSidebar} videoURL={videoURL} handleVideoURLChange={this.handleVideoURLChange} handleMediaListRevealer={this.handleMediaListRevealer}  />
+        <Sidebar handleSidebarVisibilty={this.handleSidebarVisibilty} showSidebar={showSidebar} handleVideoURLChange={this.handleVideoURLChange} handleHamburgerClick={this.handleHamburgerClick}/>
+        <MediaViewer isSidebarOpen={showSidebar} videoURL={videoURL} handleVideoURLChange={this.handleVideoURLChange} handleHamburgerClick={this.handleHamburgerClick}  />
       </s.App>
     );
   }

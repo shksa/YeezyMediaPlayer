@@ -20,4 +20,4 @@ export const FetchHtml = async(url, delay = 0) => {
 
 export const DefaultVid = "http://techslides.com/demos/sample-videos/small.mp4"
 export const TVShowListURL = "http://79.127.126.110/Serial/"
-export const CORSProxy = "https://cors-anywhere.herokuapp.com/"
+export const CORSProxy = "https://cors.io/?"

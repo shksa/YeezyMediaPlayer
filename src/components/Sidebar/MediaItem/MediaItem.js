@@ -12,7 +12,12 @@ class MediaItem extends React.Component {
     const itemURL = this.props.itemURL
     if (itemURL.charAt(itemURL.length - 1) !== '/') {
       const videoURL = itemURL.slice(utils.CORSProxy.length)
-      this.props.handleVideoURLChange(videoURL)
+      if (window.screen.width < 768) {
+        this.props.handleVideoURLChange(videoURL)
+        this.props.handleSidebarVisibilty(false)
+      } else {
+        this.props.handleVideoURLChange(videoURL)
+      }
       return
     }
     console.log('itemURL', itemURL, 'item ID', this.props.ID)
@@ -30,13 +35,13 @@ class MediaItem extends React.Component {
   }
 
   render() {
-    const {itemValue, itemURL, handleVideoURLChange} = this.props
+    const {itemValue, itemURL, handleVideoURLChange, handleSidebarVisibilty} = this.props
     const {showLoader, children} = this.state
     console.log("children", children)
     return (
       <s.Li>
-        <p onClick={this.handleMediaItemClick}>{itemValue}</p> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-        {children ? <MediaList mediaListNodes={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
+        <s.Item onClick={this.handleMediaItemClick} >{itemValue}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
+        {children ? <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodes={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
         {showLoader ? <ul><Loader forComp="mediaItem"/></ul> : null}
       </s.Li> 
     );

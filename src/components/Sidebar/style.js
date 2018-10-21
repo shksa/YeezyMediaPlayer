@@ -5,24 +5,12 @@ export const MediaListContainer = styled.div`
   height: 100%;
   overflow: scroll;
   /* justify-content: center; */
-  ${({showSidebar}) => showSidebar 
-    ? 
-    `
-    display: block;
-    @media (max-width: 768px) {
-      flex: none;
-      width: 75%;
-      position: absolute;
-      z-index: 1;
-    }
-    ` 
-    : 
-    `
-    display: none;
-    // @media (min-width: 768px) {
-    //   display: flex;
-    // }
-    `
+  display: ${({showSidebar}) => showSidebar === true? "block" : "none"};
+  @media (max-width: 768px) {
+    flex: none;
+    width: 75%;
+    position: absolute;
+    z-index: 1;
   }
   
 `;

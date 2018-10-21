@@ -6,11 +6,11 @@ import * as common from '../common/comps'
 class MediaViewer extends React.Component {
 
   render() {
-    const {videoURL, handleVideoURLChange, handleMediaListRevealer, isSidebarOpen} = this.props
+    const {videoURL, handleVideoURLChange, handleHamburgerClick, isSidebarOpen} = this.props
     return (
       <s.MediaViewerContainer>
         <s.VideoURLInputWrapper>
-            <common.MediaListRevealer isSidebarOpen={isSidebarOpen} src={HamburgerSVG} onClick={handleMediaListRevealer} />
+            <common.MediaListRevealer isSidebarOpen={isSidebarOpen} src={HamburgerSVG} onClick={handleHamburgerClick} />
             <s.VideoURLInput onChange={(event) => handleVideoURLChange(event.target.value)} placeholder="Enter video link here..." />
         </s.VideoURLInputWrapper>
         <s.VideoPlayerWrapper>

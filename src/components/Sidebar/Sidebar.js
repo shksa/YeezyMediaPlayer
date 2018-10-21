@@ -27,18 +27,18 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const {handleVideoURLChange, showSidebar, handleMediaListRevealer} = this.props
+    const {handleVideoURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
     const {mediaListNodes} = this.state
     const showLoader = this.state.mediaListNodes === null
     return (
-      <s.MediaListContainer showSidebar={showSidebar}>
+      <s.MediaListContainer handleSidebarVisibilty={handleSidebarVisibilty}  showSidebar={showSidebar}>
         { 
           showLoader
           ? <Loader />
           : 
             <s.MediaListWrapper>
-              <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleMediaListRevealer} />
-              <MediaList baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
+              <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
+              <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
             </s.MediaListWrapper>
         }
       </s.MediaListContainer>
