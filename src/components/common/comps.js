@@ -6,10 +6,7 @@ export const MediaListRevealer = styled.img`
 
 
   ${({inComp}) => (inComp === "Sidebar" 
-    ? `
-    margin-top: 15px;
-    margin-left: 15px;
-    `
+    ? ``
     : "")
   };
 `

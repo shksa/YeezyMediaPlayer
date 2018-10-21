@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("In render of App, state: ", this.state)
+    // console.log("In render of App, state: ", this.state)
     const {videoURL, showSidebar} = this.state
     return (
       <s.App>

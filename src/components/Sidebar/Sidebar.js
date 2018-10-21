@@ -22,8 +22,20 @@ class Sidebar extends React.Component {
       return
     }
     const mediaListNodes = utils.GetLinkNodes(html)
-    console.log(mediaListNodes)
+    // console.log(mediaListNodes)
     this.setState({mediaListNodes})
+  }
+
+  searchHandler = (event) => {
+    event.preventDefault()
+    if (event.keyCode === 13) {
+      const query = event.target.value
+      const element = document.getElementById(query)
+      if (element != null) {
+        element.scrollIntoView()
+        element.click()
+      }
+    }
   }
 
   render() {
@@ -36,10 +48,16 @@ class Sidebar extends React.Component {
           showLoader
           ? <Loader />
           : 
-            <s.MediaListWrapper>
-              <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
-              <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
-            </s.MediaListWrapper>
+            <React.Fragment>
+              <s.IconAndSearchBarWrapper>
+                <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
+                <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
+              </s.IconAndSearchBarWrapper>
+              <s.MediaListWrapper>
+                <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
+              </s.MediaListWrapper>
+            </React.Fragment>
+            
         }
       </s.MediaListContainer>
     );  

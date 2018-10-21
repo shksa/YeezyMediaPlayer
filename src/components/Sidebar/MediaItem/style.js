@@ -6,5 +6,7 @@ export const Li = styled.li`
 `;
 
 export const Item = styled.p`
-
+  :active {
+    color: greenyellow;
+  }
 `

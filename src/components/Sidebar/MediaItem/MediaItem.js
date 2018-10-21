@@ -20,11 +20,11 @@ class MediaItem extends React.Component {
       }
       return
     }
-    console.log('itemURL', itemURL, 'item ID', this.props.ID)
+    // console.log('itemURL', itemURL)
     this.setState({children: null, showLoader: true})
     let html
     try {
-      console.log("fetching..", itemURL)
+      // console.log("fetching..", itemURL)
       html = await utils.FetchHtml(itemURL)
     } catch (error) {
       alert(error)
@@ -37,10 +37,11 @@ class MediaItem extends React.Component {
   render() {
     const {itemValue, itemURL, handleVideoURLChange, handleSidebarVisibilty} = this.props
     const {showLoader, children} = this.state
-    console.log("children", children)
+    // console.log("children", children)
+    const itemValueSanitized = itemValue.slice(0, itemValue.length-1)
     return (
       <s.Li>
-        <s.Item onClick={this.handleMediaItemClick} >{itemValue}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
+        <s.Item id={itemValueSanitized} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
         {children ? <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodes={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
         {showLoader ? <ul><Loader forComp="mediaItem"/></ul> : null}
       </s.Li> 
