@@ -3,6 +3,12 @@ export const MediaListContainer = styled.div`
   width: 30%;
   display: ${({showSidebar}) => showSidebar ? "block" : "none" };
   background-color: yellowgreen;
+  @media (max-width: 768px) {
+    width: 85%;
+    position: absolute;
+    z-index: 1;
+    height: 100%; /* beacuse position property fucks with it's flex item behavior */
+  }
 `;
 
 export const SidebarWrapper = styled.div`

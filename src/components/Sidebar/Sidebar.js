@@ -27,6 +27,7 @@ class Sidebar extends React.Component {
   }
 
   searchHandler = (event) => {
+    console.log(event)
     event.preventDefault()
     const query = event.target.value.toUpperCase()
     const {mediaListNodes} = this.state

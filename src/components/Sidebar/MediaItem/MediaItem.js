@@ -42,7 +42,7 @@ class MediaItem extends React.Component {
     return (
       <s.Li>
         <s.Item id={itemValueSanitized} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-        {children ? <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodes={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
+        {children ? <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
         {showLoader ? <ul><Loader forComp="mediaItem"/></ul> : null}
       </s.Li> 
     );

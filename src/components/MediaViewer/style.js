@@ -5,9 +5,6 @@ export const MediaViewerContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #c38d9e;
-  @media (max-width: 768px) {
-    flex: ${({isSidebarOpen}) => isSidebarOpen ? 0 : 1};
-  }
 `;
 
 export const VideoURLInputWrapper = styled.div`
