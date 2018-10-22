@@ -24,7 +24,7 @@ class MediaItem extends React.Component {
     this.setState({children: null, showLoader: true})
     let html
     try {
-      // console.log("fetching..", itemURL)
+      console.log("fetching..", itemURL)
       html = await utils.FetchHtml(itemURL)
     } catch (error) {
       alert(error)

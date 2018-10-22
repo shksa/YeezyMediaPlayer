@@ -1,38 +1,31 @@
 import styled from 'styled-components';
 export const MediaListContainer = styled.div`
-  background-color: #41b3a3;
   flex: 1;
+  display: ${({showSidebar}) => showSidebar === false && "none" };
+  background-color: yellowgreen;
+`;
+
+export const SidebarWrapper = styled.div`
   height: 100%;
-  
-  /* justify-content: center; */
-  display: ${({showSidebar}) => showSidebar === true? "block" : "none"};
-  @media (max-width: 768px) {
-    flex: none;
-    width: 75%;
-    position: absolute;
-    z-index: 1;
-  }
-  
+  display: flex;
+  flex-direction: column;
 `;
 
 export const MediaListWrapper = styled.div`
+  flex: 1;  
   overflow: scroll;
-  position: relative;
-  top: 60px;
-  height: 90%;
 `;
 
 
 export const IconAndSearchBarWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  padding-top: 20px;
-  position: fixed;
+  padding: 20px 0 20px 20px;
 `;
 
 export const SearchBar = styled.input`
-  height: 20px;
-  margin-left: 10px;
-  font-size: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 15px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
 `;

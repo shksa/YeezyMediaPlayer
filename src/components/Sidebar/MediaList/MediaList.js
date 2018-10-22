@@ -13,7 +13,8 @@ class MediaList extends React.Component {
         {
           mediaListNodes.map((node, idx) => {
             const itemValue = node.innerText
-            const itemURL = `${baseURL}${itemValue}`
+            const nodeHrefURL = node.attributes["href"].value
+            const itemURL = `${baseURL}${nodeHrefURL}`
             // console.log("in media list, itemValue: ", itemValue)
             // console.log("in media list, baseURL: ", baseURL)
             // console.log("in media list, itemURL: ", itemURL)

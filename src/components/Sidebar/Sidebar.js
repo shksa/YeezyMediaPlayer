@@ -3,7 +3,7 @@ import MediaList from './MediaList/MediaList'
 import * as s from './style';
 import Loader from '../Loader/Loader'
 import * as utils from '../../utils'
-import * as common from '../common/comps'
+import * as common from '../common/common'
 import HamburgerSVG from '../../assets/hamburger.svg'
 
 
@@ -48,15 +48,15 @@ class Sidebar extends React.Component {
           showLoader
           ? <Loader />
           : 
-            <React.Fragment>
+            <s.SidebarWrapper>
               <s.IconAndSearchBarWrapper>
-                <common.MediaListRevealer inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
+                <common.MenuIcon inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
                 <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
               </s.IconAndSearchBarWrapper>
               <s.MediaListWrapper>
                 <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
               </s.MediaListWrapper>
-            </React.Fragment>
+            </s.SidebarWrapper>
             
         }
       </s.MediaListContainer>

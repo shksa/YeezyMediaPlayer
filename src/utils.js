@@ -18,6 +18,6 @@ export const FetchHtml = async(url, delay = 0) => {
   return html
 }
 
-export const DefaultVid = "http://techslides.com/demos/sample-videos/small.mp4"
-export const TVShowListURL = "http://79.127.126.110/Serial/"
+export const DefaultVid = ""
+export const TVShowListURL = "http://dl.uploadfdl.com/files/Serial/"
 export const CORSProxy = "https://cors.io/?"
