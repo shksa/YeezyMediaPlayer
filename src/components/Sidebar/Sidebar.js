@@ -9,7 +9,7 @@ import HamburgerSVG from '../../assets/hamburger.svg'
 
 class Sidebar extends React.Component {
 
-  state = {mediaListNodes: null}
+  state = {mediaListNodes: null, mediaListNodesToShow: null}
 
   baseURL = `${utils.CORSProxy}${utils.TVShowListURL}`
 
@@ -23,13 +23,22 @@ class Sidebar extends React.Component {
     }
     const mediaListNodes = utils.GetLinkNodes(html)
     // console.log(mediaListNodes)
-    this.setState({mediaListNodes})
+    this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
   }
 
   searchHandler = (event) => {
     event.preventDefault()
+    const query = event.target.value.toUpperCase()
+    const {mediaListNodes} = this.state
+    const relatedSearches = []
+    for (let i = 0; i < mediaListNodes.length; i++) {
+      const node = mediaListNodes[i]
+      if (node.innerText.toUpperCase().indexOf(query) > -1) { // AnyString.indexOf("") always > -1
+        relatedSearches.push(node)
+      }
+    }
+    this.setState({mediaListNodesToShow: relatedSearches})
     if (event.keyCode === 13) {
-      const query = event.target.value
       const element = document.getElementById(query)
       if (element != null) {
         element.scrollIntoView()
@@ -40,8 +49,8 @@ class Sidebar extends React.Component {
 
   render() {
     const {handleVideoURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
-    const {mediaListNodes} = this.state
-    const showLoader = this.state.mediaListNodes === null
+    const {mediaListNodesToShow} = this.state
+    const showLoader = this.state.mediaListNodesToShow === null
     return (
       <s.MediaListContainer handleSidebarVisibilty={handleSidebarVisibilty}  showSidebar={showSidebar}>
         { 
@@ -54,7 +63,7 @@ class Sidebar extends React.Component {
                 <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
               </s.IconAndSearchBarWrapper>
               <s.MediaListWrapper>
-                <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodes={mediaListNodes} handleVideoURLChange={handleVideoURLChange} />
+                <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodesToShow={mediaListNodesToShow} handleVideoURLChange={handleVideoURLChange} />
               </s.MediaListWrapper>
             </s.SidebarWrapper>
             

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const MediaListContainer = styled.div`
-  flex: 1;
-  display: ${({showSidebar}) => showSidebar === false && "none" };
+  width: 30%;
+  display: ${({showSidebar}) => showSidebar ? "block" : "none" };
   background-color: yellowgreen;
 `;
 

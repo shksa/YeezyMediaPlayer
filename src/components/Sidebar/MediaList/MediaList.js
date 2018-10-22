@@ -5,13 +5,13 @@ import MediaItem from '../MediaItem/MediaItem'
 
 class MediaList extends React.Component {
   render() {
-    const {mediaListNodes, baseURL, handleVideoURLChange, handleSidebarVisibilty} = this.props
+    const {mediaListNodesToShow, baseURL, handleVideoURLChange, handleSidebarVisibilty} = this.props
     // console.log("baseURL", baseURL)
-    // console.log("mediaListNodes", mediaListNodes)
+    // console.log("mediaListNodesToShow", mediaListNodesToShow)
     return (
       <s.UnList>
         {
-          mediaListNodes.map((node, idx) => {
+          mediaListNodesToShow.map((node, idx) => {
             const itemValue = node.innerText
             const nodeHrefURL = node.attributes["href"].value
             const itemURL = `${baseURL}${nodeHrefURL}`
