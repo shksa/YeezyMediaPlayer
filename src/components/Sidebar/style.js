@@ -1,8 +1,16 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 export const MediaListContainer = styled.div`
   width: 30%;
   display: ${({showSidebar}) => showSidebar ? "block" : "none" };
   background-color: yellowgreen;
+  ${({showLoader}) => 
+  showLoader &&
+  css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+  }
   @media (max-width: 768px) {
     width: 85%;
     position: absolute;

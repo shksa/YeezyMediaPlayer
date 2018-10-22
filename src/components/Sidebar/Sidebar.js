@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
   }
 
   searchHandler = (event) => {
-    console.log(event)
+    // console.log(event)
     event.preventDefault()
     const query = event.target.value.toUpperCase()
     const {mediaListNodes} = this.state
@@ -39,13 +39,6 @@ class Sidebar extends React.Component {
       }
     }
     this.setState({mediaListNodesToShow: relatedSearches})
-    if (event.keyCode === 13) {
-      const element = document.getElementById(query)
-      if (element != null) {
-        element.scrollIntoView()
-        element.click()
-      }
-    }
   }
 
   render() {
@@ -53,14 +46,14 @@ class Sidebar extends React.Component {
     const {mediaListNodesToShow} = this.state
     const showLoader = this.state.mediaListNodesToShow === null
     return (
-      <s.MediaListContainer handleSidebarVisibilty={handleSidebarVisibilty}  showSidebar={showSidebar}>
+      <s.MediaListContainer showLoader={showLoader}  showSidebar={showSidebar}>
         { 
           showLoader
           ? <Loader />
           : 
             <s.SidebarWrapper>
               <s.IconAndSearchBarWrapper>
-                <common.MenuIcon inComp="Sidebar" src={HamburgerSVG} onClick={handleHamburgerClick} />
+                <common.MenuIcon src={HamburgerSVG} onClick={handleHamburgerClick} />
                 <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
               </s.IconAndSearchBarWrapper>
               <s.MediaListWrapper>
