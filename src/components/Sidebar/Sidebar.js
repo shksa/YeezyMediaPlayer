@@ -66,7 +66,7 @@ class Sidebar extends React.Component {
 
   render() {
     const {handleMediaURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
-    const {mediaListNodesToShow, mediaSourceURL} = this.state
+    const {mediaListNodesToShow} = this.state
     const showLoader = this.state.mediaListNodesToShow === null
     return (
       <s.MediaListContainer showSidebar={showSidebar}>
