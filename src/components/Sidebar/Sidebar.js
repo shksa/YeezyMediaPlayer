@@ -14,7 +14,8 @@ class Sidebar extends React.Component {
     this.setState({mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL})
     let html
     try {
-      html = await utils.FetchHtml(mediaSourceURL, 0)
+      console.log("fetching..", mediaSourceURL)
+      html = await utils.FetchHtml(mediaSourceURL)
     } catch (error) {
       if (error instanceof utils.HttpError){
         alert(error)
@@ -25,9 +26,9 @@ class Sidebar extends React.Component {
       }
     }
     const LinkNodes = utils.GetLinkNodes(html)
-    console.log("LinkNodes before", LinkNodes)
+    // console.log("LinkNodes before", LinkNodes)
     const mediaListNodes = utils.ProcessLinkNodes(LinkNodes, mediaSourceURL)
-    console.log("LinkNodes after", mediaListNodes)
+    // console.log("LinkNodes after", mediaListNodes)
     
     // console.log(mediaListNodes)
     this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
