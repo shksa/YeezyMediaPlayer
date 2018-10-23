@@ -73,7 +73,7 @@ class Sidebar extends React.Component {
         <s.IconAndMediaTypeWrapper>
           <common.MenuIcon className="material-icons" onClick={handleHamburgerClick}>menu</common.MenuIcon>
           <s.MediaTypesContainer>
-            <s.MediaTypeWrapper><s.MediaType onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="video" />Video</s.MediaTypeWrapper> 
+            <s.MediaTypeWrapper><s.MediaType defaultChecked onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="video" />Video</s.MediaTypeWrapper> 
             <s.MediaTypeWrapper><s.MediaType onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="audio"/> Audio</s.MediaTypeWrapper>
           </s.MediaTypesContainer>
         </s.IconAndMediaTypeWrapper>
