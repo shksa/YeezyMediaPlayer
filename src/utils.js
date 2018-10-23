@@ -19,9 +19,11 @@ export const GetLinkNodes = (mediaListHTML, mediaURL) => {
   const ATagNodeCollection = doc.getElementsByTagName("a")
   const LinksNodes = Object.keys(ATagNodeCollection).map((key) => ATagNodeCollection.item(key))
   LinksNodes.shift() // first elem is <a href="../"></a>, should be removed from the LinksNodes
+  console.log("LinksNodes before", LinksNodes)
   LinksNodes.forEach((node) => {
     node.href = node.href.replace(hostURL, mediaURL)
   })
+  console.log("LinksNodes after", LinksNodes)
   return LinksNodes
 }
 
