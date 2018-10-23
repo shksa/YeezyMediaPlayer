@@ -11,12 +11,12 @@ class MediaItem extends React.Component {
   handleMediaItemClick = async() => {
     const itemURL = this.props.itemURL
     if (itemURL.charAt(itemURL.length - 1) !== '/') {
-      const videoURL = itemURL.slice(utils.CORSProxy.length)
+      const mediaURL = itemURL.slice(utils.CORSProxy.length)
       if (window.screen.width < 768) {
-        this.props.handleVideoURLChange(videoURL)
+        this.props.handleMediaURLChange(mediaURL)
         this.props.handleSidebarVisibilty(false)
       } else {
-        this.props.handleVideoURLChange(videoURL)
+        this.props.handleMediaURLChange(mediaURL)
       }
       return
     }
@@ -27,23 +27,28 @@ class MediaItem extends React.Component {
       console.log("fetching..", itemURL)
       html = await utils.FetchHtml(itemURL)
     } catch (error) {
-      alert(error)
-      return
+      if (error instanceof utils.HttpError){
+        alert(error)
+        return
+      } else {
+        alert(error)
+        html = utils.SampleHTML
+      }
     }
-    const LinkNodes = utils.GetLinkNodes(html)
+    const LinkNodes = utils.GetLinkNodes(html, itemURL)
     this.setState({children: LinkNodes, showLoader: false})
   }
 
   render() {
-    const {itemValue, itemURL, handleVideoURLChange, handleSidebarVisibilty} = this.props
+    const {itemValue, itemURL, handleMediaURLChange, handleSidebarVisibilty} = this.props
     const {showLoader, children} = this.state
     // console.log("children", children)
     const itemValueSanitized = itemValue.slice(0, itemValue.length-1)
     return (
       <s.Li>
-        <s.Item id={itemValueSanitized} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-        {children ? <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleVideoURLChange={handleVideoURLChange} /> : null}
-        {showLoader ? <ul><Loader forComp="mediaItem"/></ul> : null}
+        <s.Item onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
+        {children && <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleMediaURLChange={handleMediaURLChange} /> }
+        {showLoader && <ul><Loader forComp="mediaItem"/></ul>}
       </s.Li> 
     );
   }

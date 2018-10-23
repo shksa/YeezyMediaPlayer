@@ -4,26 +4,41 @@ import * as s from './style';
 import Loader from '../Loader/Loader'
 import * as utils from '../../utils'
 import * as common from '../common/common'
-import HamburgerSVG from '../../assets/hamburger.svg'
 
 
 class Sidebar extends React.Component {
 
-  state = {mediaListNodes: null, mediaListNodesToShow: null}
+  state = {mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL: null}
 
-  baseURL = `${utils.CORSProxy}${utils.TVShowListURL}`
-
-  componentWillMount = async() => {
+  getMedia = async(mediaSourceURL) => {
+    this.setState({mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL})
     let html
     try {
-      html = await utils.FetchHtml(this.baseURL, 0)
+      html = await utils.FetchHtml(mediaSourceURL, 0)
     } catch (error) {
-      alert(error)
-      return
+      if (error instanceof utils.HttpError){
+        alert(error)
+        return
+      } else {
+        alert(error)
+        html = utils.SampleHTML
+      }
     }
-    const mediaListNodes = utils.GetLinkNodes(html)
+    const mediaListNodes = utils.GetLinkNodes(html, mediaSourceURL)
     // console.log(mediaListNodes)
     this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
+  }
+
+  componentWillMount = () => {
+    const defaultMediaURL = `${utils.CORSProxy}${utils.MediaSourceMap.video}`
+    this.getMedia(defaultMediaURL)
+  }
+
+  handleMediaTypeOnClick = (event) => {
+    const mediaType = event.target.value
+    console.log(mediaType)
+    const mediaSourceURL = `${utils.CORSProxy}${utils.MediaSourceMap[mediaType]}`
+    this.getMedia(mediaSourceURL)
   }
 
   searchHandler = (event) => {
@@ -41,27 +56,35 @@ class Sidebar extends React.Component {
     this.setState({mediaListNodesToShow: relatedSearches})
   }
 
+  handleMediaSourceURLInput = (event) => {
+    event.preventDefault()
+    if (event.keyCode === 13) {
+      const mediaSourceURL = `${utils.CORSProxy}${event.target.value}`
+      this.getMedia(mediaSourceURL)
+    }
+  }
+
   render() {
-    const {handleVideoURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
-    const {mediaListNodesToShow} = this.state
+    const {handleMediaURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
+    const {mediaListNodesToShow, mediaSourceURL} = this.state
     const showLoader = this.state.mediaListNodesToShow === null
     return (
-      <s.MediaListContainer showLoader={showLoader}  showSidebar={showSidebar}>
-        { 
-          showLoader
-          ? <Loader />
-          : 
-            <s.SidebarWrapper>
-              <s.IconAndSearchBarWrapper>
-                <common.MenuIcon src={HamburgerSVG} onClick={handleHamburgerClick} />
-                <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
-              </s.IconAndSearchBarWrapper>
-              <s.MediaListWrapper>
-                <MediaList handleSidebarVisibilty={handleSidebarVisibilty} baseURL={this.baseURL} mediaListNodesToShow={mediaListNodesToShow} handleVideoURLChange={handleVideoURLChange} />
-              </s.MediaListWrapper>
-            </s.SidebarWrapper>
-            
-        }
+      <s.MediaListContainer showSidebar={showSidebar}>
+        <s.IconAndMediaTypeWrapper>
+          <common.MenuIcon className="material-icons" onClick={handleHamburgerClick}>menu</common.MenuIcon>
+          <s.MediaTypesContainer>
+            <s.MediaTypeWrapper><s.MediaType onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="video" />Video</s.MediaTypeWrapper> 
+            <s.MediaTypeWrapper><s.MediaType onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="audio"/> Audio</s.MediaTypeWrapper>
+          </s.MediaTypesContainer>
+        </s.IconAndMediaTypeWrapper>
+        <s.MediaSourceURLInput onKeyUp={this.handleMediaSourceURLInput} placeholder="Or enter a media source URL..."/>
+        <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
+        <s.MediaListWrapper showLoader={showLoader}>
+          {showLoader
+            ? <Loader />
+            : <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={mediaListNodesToShow} handleMediaURLChange={handleMediaURLChange} />
+          }
+        </s.MediaListWrapper>
       </s.MediaListContainer>
     );  
   }

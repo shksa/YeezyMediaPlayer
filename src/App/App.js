@@ -6,12 +6,12 @@ import * as utils from '../utils';
 
 class App extends Component {
 
-  state = {videoURL: utils.DefaultVid, showSidebar: true}
+  state = {mediaURL: utils.DefaultVid, showSidebar: true}
 
   
-  handleVideoURLChange = (videoURL) => {
-    console.log("videoURL", videoURL)
-    this.setState({videoURL})
+  handleMediaURLChange = (mediaURL) => {
+    console.log("mediaURL", mediaURL)
+    this.setState({mediaURL})
   }
 
   handleHamburgerClick = () => {
@@ -28,11 +28,11 @@ class App extends Component {
 
   render() {
     // console.log("In render of App, state: ", this.state)
-    const {videoURL, showSidebar} = this.state
+    const {mediaURL, showSidebar} = this.state
     return (
       <s.App>
-        <Sidebar handleSidebarVisibilty={this.handleSidebarVisibilty} showSidebar={showSidebar} handleVideoURLChange={this.handleVideoURLChange} handleHamburgerClick={this.handleHamburgerClick}/>
-        <MediaViewer isSidebarOpen={showSidebar} videoURL={videoURL} handleVideoURLChange={this.handleVideoURLChange} handleHamburgerClick={this.handleHamburgerClick}  />
+        <Sidebar handleSidebarVisibilty={this.handleSidebarVisibilty} showSidebar={showSidebar} handleMediaURLChange={this.handleMediaURLChange} handleHamburgerClick={this.handleHamburgerClick}/>
+        <MediaViewer isSidebarOpen={showSidebar} mediaURL={mediaURL} handleMediaURLChange={this.handleMediaURLChange} handleHamburgerClick={this.handleHamburgerClick}  />
       </s.App>
     );
   }

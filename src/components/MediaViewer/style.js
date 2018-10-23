@@ -4,17 +4,17 @@ export const MediaViewerContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #c38d9e;
+  background-color: black;
 `;
 
-export const VideoURLInputWrapper = styled.div`
+export const MediaURLInputWrapper = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
   justify-content: space-around;
 `
 
-export const VideoURLInput = styled.input`
+export const MediaURLInput = styled.input`
   padding: 10px;
   background-color: black;
   outline: none;
@@ -23,7 +23,7 @@ export const VideoURLInput = styled.input`
   color: white;
 `
 
-export const VideoPlayerWrapper = styled.div`
+export const MediaPlayerWrapper = styled.div`
   flex: 5;
   background-color: black;
   display: flex;
@@ -34,5 +34,6 @@ export const VideoPlayerWrapper = styled.div`
 export const VideoPlayer = styled.video`
   max-height: 100%;
   max-width: 100%;
-  background-color: black;
 `
+
+export const AudioPlayer = styled.audio``
