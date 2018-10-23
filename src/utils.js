@@ -14,16 +14,18 @@ export const SampleHTML = `
 
 const hostURL = window.location.href
 
-export const GetLinkNodes = (mediaListHTML, mediaURL) => {
+export const GetLinkNodes = (mediaListHTML) => {
   const doc = domParser.parseFromString(mediaListHTML, "text/html")
   const ATagNodeCollection = doc.getElementsByTagName("a")
   const LinksNodes = Object.keys(ATagNodeCollection).map((key) => ATagNodeCollection.item(key))
   LinksNodes.shift() // first elem is <a href="../"></a>, should be removed from the LinksNodes
-  console.log("LinksNodes before", LinksNodes)
+  return LinksNodes
+}
+
+export const ProcessLinkNodes = (LinksNodes, mediaURL) => {
   LinksNodes.forEach((node) => {
     node.href = node.href.replace(hostURL, mediaURL)
   })
-  console.log("LinksNodes after", LinksNodes)
   return LinksNodes
 }
 

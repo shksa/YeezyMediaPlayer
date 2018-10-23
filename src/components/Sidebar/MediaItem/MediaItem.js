@@ -35,8 +35,11 @@ class MediaItem extends React.Component {
         html = utils.SampleHTML
       }
     }
-    const LinkNodes = utils.GetLinkNodes(html, itemURL)
-    this.setState({children: LinkNodes, showLoader: false})
+    const LinkNodes = utils.GetLinkNodes(html)
+    console.log("LinkNodes before", LinkNodes)
+    const mediaListNodes = utils.ProcessLinkNodes(LinkNodes, itemURL)
+    console.log("LinkNodes after", mediaListNodes)
+    this.setState({children: mediaListNodes, showLoader: false})
   }
 
   render() {
