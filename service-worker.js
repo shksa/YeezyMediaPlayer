@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/yeezyMediaPlayer/precache-manifest.dc996123f7b8036664042120b5524e03.js"
+  "/YeezyMediaPlayer/precache-manifest.98727420b60f75cb138ec38782ed91f0.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/yeezyMediaPlayer/index.html", {
+workbox.routing.registerNavigationRoute("/YeezyMediaPlayer/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
