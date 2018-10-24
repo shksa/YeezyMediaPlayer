@@ -14,7 +14,7 @@
     "predeployToGH": "yarn build",
     "deployToGH": "gh-pages -d build",
     "predeployToRemote": "yarn build",
-    "deployToRemote": "sh deployToRemote.sh",
+    "deployToRemote": "zsh deployToRemote.zsh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
