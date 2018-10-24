@@ -6,9 +6,10 @@ import Loader from '../../Loader/Loader'
 
 class MediaItem extends React.Component {
 
-  state = {children: null, showLoader: false}
+  state = {children: null, showLoader: false,}
   
   handleMediaItemClick = async() => {
+    this.props.clickedItemTracker(this.props.itemID)
     const itemURL = this.props.itemURL
     if (itemURL.charAt(itemURL.length - 1) !== '/') {
       const mediaURL = itemURL.slice(utils.CORSProxy.length)
@@ -20,7 +21,6 @@ class MediaItem extends React.Component {
       }
       return
     }
-    // console.log('itemURL', itemURL)
     this.setState({children: null, showLoader: true})
     let html
     try {
@@ -36,21 +36,21 @@ class MediaItem extends React.Component {
       }
     }
     const LinkNodes = utils.GetLinkNodes(html)
-    console.log("LinkNodes before", LinkNodes)
+    // console.log("LinkNodes before", LinkNodes)
     const mediaListNodes = utils.ProcessLinkNodes(LinkNodes, itemURL)
-    console.log("LinkNodes after", mediaListNodes)
+    // console.log("LinkNodes after", mediaListNodes)
     this.setState({children: mediaListNodes, showLoader: false})
   }
 
   render() {
-    const {itemValue, itemURL, handleMediaURLChange, handleSidebarVisibilty} = this.props
+    const {itemValue, itemURL, handleMediaURLChange, handleSidebarVisibilty, itemID,  clickedItemID, clickedItemTracker} = this.props
     const {showLoader, children} = this.state
     // console.log("children", children)
     const itemValueSanitized = itemValue.slice(0, itemValue.length-1)
     return (
       <s.Li>
-        <s.Item onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-        {children && <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleMediaURLChange={handleMediaURLChange} /> }
+        <s.Item isClicked={clickedItemID === itemID} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
+        {children && <MediaList clickedItemID={clickedItemID} clickedItemTracker={clickedItemTracker} handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleMediaURLChange={handleMediaURLChange} /> }
         {showLoader && <ul><Loader forComp="mediaItem"/></ul>}
       </s.Li> 
     );

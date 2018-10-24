@@ -8,7 +8,11 @@ import * as common from '../common/common'
 
 class Sidebar extends React.Component {
 
-  state = {mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL: null}
+  state = {mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL: null, clickedItemID: null}
+
+  clickedItemTracker = (clickedItemID) => {
+    this.setState({clickedItemID})
+  }
 
   getMedia = async(mediaSourceURL) => {
     this.setState({mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL})
@@ -71,7 +75,7 @@ class Sidebar extends React.Component {
 
   render() {
     const {handleMediaURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
-    const {mediaListNodesToShow} = this.state
+    const {mediaListNodesToShow, clickedItemID} = this.state
     const showLoader = this.state.mediaListNodesToShow === null
     return (
       <s.MediaListContainer showSidebar={showSidebar}>
@@ -87,7 +91,7 @@ class Sidebar extends React.Component {
         <s.MediaListWrapper showLoader={showLoader}>
           {showLoader
             ? <Loader />
-            : <MediaList handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={mediaListNodesToShow} handleMediaURLChange={handleMediaURLChange} />
+            : <MediaList clickedItemID={clickedItemID} clickedItemTracker={this.clickedItemTracker} handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={mediaListNodesToShow} handleMediaURLChange={handleMediaURLChange} />
           }
         </s.MediaListWrapper>
       </s.MediaListContainer>

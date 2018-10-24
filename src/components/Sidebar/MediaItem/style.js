@@ -12,5 +12,6 @@ export const Item = styled.p`
   :active {
     color: blueviolet;
   }
+  color: ${({isClicked}) => isClicked && "blue"};
   font-weight: bold;
 `
