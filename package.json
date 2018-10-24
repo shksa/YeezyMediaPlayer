@@ -11,8 +11,10 @@
   },
   "homepage": "/YeezyMediaPlayer",
   "scripts": {
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
+    "predeployToGH": "yarn build",
+    "deployToGH": "gh-pages -d build",
+    "predeployToRemote": "yarn build",
+    "deployToRemote": "sh deployToRemote.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
