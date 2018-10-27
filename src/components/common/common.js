@@ -1,9 +1,12 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const MenuIcon = styled.i`
   cursor: pointer;
-  display: ${({isSidebarOpen}) => isSidebarOpen === true ? "none" : "block"};
-  color: ${({insideComp}) => insideComp === "MediaViewer" && "white"};
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+  color: ${({color}) => color};
 `
 
 export const SearchBar = styled.input`

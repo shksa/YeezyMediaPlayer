@@ -35,7 +35,6 @@ class App extends Component {
           toggleSidebarVisibility={this.toggleSidebarVisibility}
         />
         <MediaViewer 
-          isSidebarOpen={showSidebar} 
           mediaURL={mediaURL} 
           handleMediaURLChange={this.handleMediaURLChange} 
           toggleSidebarVisibility={this.toggleSidebarVisibility}  

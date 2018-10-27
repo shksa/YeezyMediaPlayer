@@ -2,10 +2,11 @@ import styled, {css} from 'styled-components';
 import { SearchBar } from '../common/common';
 export const MediaListContainer = styled.div`
   width: 30%;
-  display: ${({showSidebar}) => showSidebar ? "flex" : "none" };
+  display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
   @media (max-width: 768px) {
+    display: ${({showSidebar}) => showSidebar ? "flex" : "none" };
     width: 85%;
     position: absolute;
     z-index: 1;
@@ -20,9 +21,10 @@ export const IconAndMediaTypeWrapper = styled.div`
 `;
 
 export const MediaTypesContainer = styled.div`
+  margin-left: 5px;
   display: flex;
   flex: 1;
-  justify-content: space-around;
+  flex-wrap: wrap;
 `
 
 export const MediaTypeWrapper = styled.div`
@@ -30,6 +32,8 @@ export const MediaTypeWrapper = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
+  margin-left: 10px;
+  margin-bottom: 5px;
 `
 
 export const MediaType = styled.input`
