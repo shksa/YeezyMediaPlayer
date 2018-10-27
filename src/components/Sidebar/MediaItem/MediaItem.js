@@ -43,14 +43,29 @@ class MediaItem extends React.Component {
   }
 
   render() {
-    const {itemValue, itemURL, handleMediaURLChange, handleSidebarVisibilty, itemID,  clickedItemID, clickedItemTracker} = this.props
+    const {
+      itemValue, 
+      handleMediaURLChange, 
+      handleSidebarVisibilty, 
+      itemID,  
+      clickedItemID, 
+      clickedItemTracker
+    } = this.props
     const {showLoader, children} = this.state
     // console.log("children", children)
     const itemValueSanitized = itemValue.slice(0, itemValue.length-1)
     return (
       <s.Li>
         <s.Item isClicked={clickedItemID === itemID} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-        {children && <MediaList clickedItemID={clickedItemID} clickedItemTracker={clickedItemTracker} handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={children} baseURL={itemURL} handleMediaURLChange={handleMediaURLChange} /> }
+        {children 
+        && 
+        <MediaList 
+          clickedItemID={clickedItemID} 
+          clickedItemTracker={clickedItemTracker} 
+          handleSidebarVisibilty={handleSidebarVisibilty} 
+          mediaListNodes={children} 
+          handleMediaURLChange={handleMediaURLChange} 
+        /> }
         {showLoader && <ul><Loader forComp="mediaItem"/></ul>}
       </s.Li> 
     );

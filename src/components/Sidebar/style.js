@@ -35,17 +35,13 @@ export const MediaType = styled.input`
   margin-right: 5px;
 `
 
-export const SearchBar = styled.input`
+export const MediaSourceURLInput = styled.input`
   margin: 10px;
   padding: 10px;
   font-size: 15px;
   background-color: black;
   color: white;
   font-weight: bold;
-`;
-
-export const MediaSourceURLInput = styled(SearchBar)`
-
 `
 
 export const MediaListWrapper = styled.div`

@@ -14,25 +14,31 @@ class App extends Component {
     this.setState({mediaURL})
   }
 
-  handleHamburgerClick = () => {
+  toggleSidebarVisibility = () => {
     this.setState((state) => ({
       showSidebar: !state.showSidebar
     }))
   }
 
-  handleSidebarVisibilty = (boolean) => {
-    this.setState({
-      showSidebar: boolean
-    })
-  }
+  closeSidebar = () => {this.setState({showSidebar: false})}
 
   render() {
     // console.log("In render of App, state: ", this.state)
     const {mediaURL, showSidebar} = this.state
     return (
       <s.App>
-        <Sidebar handleSidebarVisibilty={this.handleSidebarVisibilty} showSidebar={showSidebar} handleMediaURLChange={this.handleMediaURLChange} handleHamburgerClick={this.handleHamburgerClick}/>
-        <MediaViewer isSidebarOpen={showSidebar} mediaURL={mediaURL} handleMediaURLChange={this.handleMediaURLChange} handleHamburgerClick={this.handleHamburgerClick}  />
+        <Sidebar 
+          closeSidebar={this.closeSidebar} 
+          showSidebar={showSidebar} 
+          handleMediaURLChange={this.handleMediaURLChange} 
+          toggleSidebarVisibility={this.toggleSidebarVisibility}
+        />
+        <MediaViewer 
+          isSidebarOpen={showSidebar} 
+          mediaURL={mediaURL} 
+          handleMediaURLChange={this.handleMediaURLChange} 
+          toggleSidebarVisibility={this.toggleSidebarVisibility}  
+        />
       </s.App>
     );
   }

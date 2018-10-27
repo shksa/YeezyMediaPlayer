@@ -8,14 +8,21 @@ import * as common from '../common/common'
 
 class Sidebar extends React.Component {
 
-  state = {mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL: null, clickedItemID: null}
+  state = { mediaListNodes: null, clickedItemID: null, mediaTypeToURLSourceMap: null, mediaTypes: null, defaultMediaTypeToShow: null }
+
+  constructor(props) {
+    super(props)
+    this.state.mediaTypeToURLSourceMap = utils.MediaTypeToURLSourceMap
+    this.state.mediaTypes = Object.keys(utils.MediaTypeToURLSourceMap)
+    this.state.defaultMediaTypeToShow = this.state.mediaTypes[0]
+  }
 
   clickedItemTracker = (clickedItemID) => {
     this.setState({clickedItemID})
   }
 
   getMedia = async(mediaSourceURL) => {
-    this.setState({mediaListNodes: null, mediaListNodesToShow: null, mediaSourceURL})
+    this.setState({mediaListNodes: null})
     let html
     try {
       console.log("fetching..", mediaSourceURL)
@@ -35,34 +42,21 @@ class Sidebar extends React.Component {
     // console.log("LinkNodes after", mediaListNodes)
     
     // console.log(mediaListNodes)
-    this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
+    this.setState({mediaListNodes})
   }
 
   componentWillMount = () => {
-    const defaultMediaURL = `${utils.CORSProxy}${utils.MediaSourceMap.video}`
+    const defaultMediaTypeToShow = this.state.defaultMediaTypeToShow
+    const mediaURL = this.state.mediaTypeToURLSourceMap[defaultMediaTypeToShow]
+    const defaultMediaURL = `${utils.CORSProxy}${mediaURL}`
     this.getMedia(defaultMediaURL)
   }
 
   handleMediaTypeOnClick = (event) => {
     const mediaType = event.target.value
     console.log(mediaType)
-    const mediaSourceURL = `${utils.CORSProxy}${utils.MediaSourceMap[mediaType]}`
+    const mediaSourceURL = `${utils.CORSProxy}${this.state.mediaTypeToURLSourceMap[mediaType]}`
     this.getMedia(mediaSourceURL)
-  }
-
-  searchHandler = (event) => {
-    // console.log(event)
-    event.preventDefault()
-    const query = event.target.value.toUpperCase()
-    const {mediaListNodes} = this.state
-    const relatedSearches = []
-    for (let i = 0; i < mediaListNodes.length; i++) {
-      const node = mediaListNodes[i]
-      if (node.innerText.toUpperCase().indexOf(query) > -1) { // AnyString.indexOf("") always > -1
-        relatedSearches.push(node)
-      }
-    }
-    this.setState({mediaListNodesToShow: relatedSearches})
   }
 
   handleMediaSourceURLInput = (event) => {
@@ -74,24 +68,42 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const {handleMediaURLChange, showSidebar, handleHamburgerClick, handleSidebarVisibilty} = this.props
-    const {mediaListNodesToShow, clickedItemID} = this.state
-    const showLoader = this.state.mediaListNodesToShow === null
+    const {handleMediaURLChange, showSidebar, toggleSidebarVisibility, closeSidebar} = this.props
+    const {clickedItemID, mediaListNodes, mediaTypes, defaultMediaTypeToShow} = this.state
+    console.log("mediaTypes: ", mediaTypes)
+    const showLoader = mediaListNodes === null
     return (
       <s.MediaListContainer showSidebar={showSidebar}>
         <s.IconAndMediaTypeWrapper>
-          <common.MenuIcon className="material-icons" onClick={handleHamburgerClick}>menu</common.MenuIcon>
+          <common.MenuIcon className="material-icons" onClick={toggleSidebarVisibility}>menu</common.MenuIcon>
           <s.MediaTypesContainer>
-            <s.MediaTypeWrapper><s.MediaType defaultChecked onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="video" />Video</s.MediaTypeWrapper> 
-            <s.MediaTypeWrapper><s.MediaType onClick={this.handleMediaTypeOnClick} type="radio" name="mediaType" value="audio"/> Audio</s.MediaTypeWrapper>
+            {
+              mediaTypes.map((mediaType) => 
+                (<s.MediaTypeWrapper key={mediaType}>
+                  <s.MediaType 
+                    defaultChecked={defaultMediaTypeToShow === mediaType} 
+                    onClick={this.handleMediaTypeOnClick} 
+                    type="radio" 
+                    name="mediaType" 
+                    value={mediaType} 
+                  />
+                  {mediaType}
+                </s.MediaTypeWrapper>)
+              )
+            }
           </s.MediaTypesContainer>
         </s.IconAndMediaTypeWrapper>
         <s.MediaSourceURLInput onKeyUp={this.handleMediaSourceURLInput} placeholder="Or enter a media source URL..."/>
-        <s.SearchBar onKeyUp={this.searchHandler} placeholder="Search here..."/>
         <s.MediaListWrapper showLoader={showLoader}>
           {showLoader
             ? <Loader />
-            : <MediaList clickedItemID={clickedItemID} clickedItemTracker={this.clickedItemTracker} handleSidebarVisibilty={handleSidebarVisibilty} mediaListNodesToShow={mediaListNodesToShow} handleMediaURLChange={handleMediaURLChange} />
+            : <MediaList
+                mediaListNodes={mediaListNodes} 
+                clickedItemID={clickedItemID} 
+                clickedItemTracker={this.clickedItemTracker} 
+                closeSidebar={closeSidebar}
+                handleMediaURLChange={handleMediaURLChange} 
+              />
           }
         </s.MediaListWrapper>
       </s.MediaListContainer>

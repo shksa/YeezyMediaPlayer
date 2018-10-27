@@ -12,11 +12,11 @@ class MediaViewer extends React.Component {
   }
 
   render() {
-    const {mediaURL, handleHamburgerClick, isSidebarOpen} = this.props
+    const {mediaURL, toggleSidebarVisibility, isSidebarOpen} = this.props
     return (
       <s.MediaViewerContainer isSidebarOpen={isSidebarOpen}>
         <s.MediaURLInputWrapper>
-            <common.MenuIcon insideComp="MediaViewer" className="material-icons" isSidebarOpen={isSidebarOpen} onClick={handleHamburgerClick} >menu</common.MenuIcon>
+            <common.MenuIcon insideComp="MediaViewer" className="material-icons" isSidebarOpen={isSidebarOpen} onClick={toggleSidebarVisibility} >menu</common.MenuIcon>
             <s.MediaURLInput onKeyUp={this.handleMediaURLInput} placeholder="Enter video link here..." />
         </s.MediaURLInputWrapper>
         <s.MediaPlayerWrapper>

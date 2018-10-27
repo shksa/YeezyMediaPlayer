@@ -49,9 +49,9 @@ export const FetchHtml = async(url, delay = 0) => {
 
 export const DefaultVid = ""
 
-export const MediaSourceMap = {
-  video: "http://dl.uploadfdl.com/files/Serial/",
-  audio: "http://thesoundeffect.com/music/"
+export const MediaTypeToURLSourceMap = {
+  TVShows: "http://dl.uploadfdl.com/files/Serial/",
+  Movies: "http://79.127.126.110/Movie/",
 }
 
 export const CORSProxy = "https://cors.io/?"
