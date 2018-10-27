@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/YeezyMediaPlayer/precache-manifest.0274df782d81cfbb825d1c8d54a6dded.js"
+  "/YeezyMediaPlayer/precache-manifest.8313c074b48d7834d0ad7ac7eedd9b3f.js"
 );
 
 workbox.clientsClaim();
