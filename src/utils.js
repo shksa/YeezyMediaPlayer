@@ -56,7 +56,7 @@ export const DefaultVid = ""
 export const MediaTypeToURLSourceMap = {
   TVShows: "http://dl.uploadfdl.com/files/Serial/",
   Movies: "http://79.127.126.110/Movie/",
-  EveryFuckingThing: "http://mc1.dl3enter.in/files/",
+  SuperDatabase: "http://mc1.dl3enter.in/files/",
 }
 
 export const CORSProxy = "https://cors.io/?"
