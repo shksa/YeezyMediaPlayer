@@ -17,7 +17,7 @@ class MediaViewer extends React.Component {
       <s.MediaViewerContainer isSidebarOpen={isSidebarOpen}>
         <s.MediaURLInputWrapper>
             <common.MenuIcon insideComp="MediaViewer" className="material-icons" isSidebarOpen={isSidebarOpen} onClick={toggleSidebarVisibility} >menu</common.MenuIcon>
-            <s.MediaURLInput onKeyUp={this.handleMediaURLInput} placeholder="Enter video link here..." />
+            <s.MediaURLInput onKeyUp={this.handleMediaURLInput} placeholder="Or enter a video link here..." />
         </s.MediaURLInputWrapper>
         <s.MediaPlayerWrapper>
           {

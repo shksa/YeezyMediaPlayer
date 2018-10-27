@@ -14,18 +14,22 @@ export const SampleHTML = `
 
 const hostURL = window.location.href
 
-export const GetLinkNodes = (mediaListHTML) => {
+const linksToAvoid = ["../", "index.html", "Last modified", "Name", "Size", "Description", "Parent Directory", undefined]
+
+export const GetLinkNodes = (mediaListHTML, mediaSourceURL) => {
   const doc = domParser.parseFromString(mediaListHTML, "text/html")
   const ATagNodeCollection = doc.getElementsByTagName("a")
-  const LinksNodes = Object.keys(ATagNodeCollection).map((key) => ATagNodeCollection.item(key))
-  LinksNodes.shift() // first elem is <a href="../"></a>, should be removed from the LinksNodes
-  return LinksNodes
-}
+  let LinksNodes= []
 
-export const ProcessLinkNodes = (LinksNodes, mediaURL) => {
-  LinksNodes.forEach((node) => {
-    node.href = node.href.replace(hostURL, mediaURL)
-  })
+  for (const key in ATagNodeCollection) {
+    const node = ATagNodeCollection[key];
+    const text = node.innerText
+    if (!linksToAvoid.includes(text)) {
+      node.href = mediaSourceURL + node.attributes.href.value
+      LinksNodes.push(node)
+    }
+  }
+  // console.log("LinksNodes:", LinksNodes)
   return LinksNodes
 }
 
@@ -52,6 +56,7 @@ export const DefaultVid = ""
 export const MediaTypeToURLSourceMap = {
   TVShows: "http://dl.uploadfdl.com/files/Serial/",
   Movies: "http://79.127.126.110/Movie/",
+  EveryFuckingThing: "http://mc1.dl3enter.in/files/",
 }
 
 export const CORSProxy = "https://cors.io/?"

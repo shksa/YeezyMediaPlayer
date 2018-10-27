@@ -21,7 +21,7 @@ class MediaList extends React.Component {
           {
             mediaListNodesToShow.map((node, idx) => {
               const nodeValue = node.innerText
-              const nodeHrefURL = node.attributes["href"].value
+              const nodeHrefURL = node.href
               // console.log("in media list, nodeValue: ", nodeValue)
               // console.log("in media list, nodeHrefURL: ", nodeHrefURL)
               return (

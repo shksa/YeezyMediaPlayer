@@ -34,12 +34,9 @@ class Sidebar extends React.Component {
         html = utils.SampleHTML
       }
     }
-    const LinkNodes = utils.GetLinkNodes(html)
-    // console.log("LinkNodes before", LinkNodes)
-    const mediaListNodes = utils.ProcessLinkNodes(LinkNodes, mediaSourceURL)
-    // console.log("LinkNodes after", mediaListNodes)
+    const mediaListNodes = utils.GetLinkNodes(html, mediaSourceURL)
     
-    // console.log(mediaListNodes)
+    // console.log("mediaListNodes: ", mediaListNodes)
     this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
   }
 

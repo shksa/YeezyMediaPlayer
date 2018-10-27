@@ -15,12 +15,11 @@ export const MediaURLInputWrapper = styled.div`
 `
 
 export const MediaURLInput = styled.input`
-  padding: 10px;
-  background-color: black;
+  background-color: transparent;
   outline: none;
-  font-weight: bold;
   font-size: 15px;
   color: white;
+  border: none;
 `
 
 export const MediaPlayerWrapper = styled.div`
