@@ -1,7 +1,7 @@
 {
   "main.css": "/YeezyMediaPlayer/static/css/main.122a32b6.chunk.css",
-  "main.js": "/YeezyMediaPlayer/static/js/main.5953ef98.chunk.js",
-  "main.js.map": "/YeezyMediaPlayer/static/js/main.5953ef98.chunk.js.map",
+  "main.js": "/YeezyMediaPlayer/static/js/main.11129b30.chunk.js",
+  "main.js.map": "/YeezyMediaPlayer/static/js/main.11129b30.chunk.js.map",
   "static/js/1.b6aee781.chunk.js": "/YeezyMediaPlayer/static/js/1.b6aee781.chunk.js",
   "static/js/1.b6aee781.chunk.js.map": "/YeezyMediaPlayer/static/js/1.b6aee781.chunk.js.map",
   "runtime~main.js": "/YeezyMediaPlayer/static/js/runtime~main.701d9ae6.js",
@@ -9,6 +9,6 @@
   "static/media/spinner.svg": "/YeezyMediaPlayer/static/media/spinner.c49febc4.svg",
   "static/css/main.122a32b6.chunk.css.map": "/YeezyMediaPlayer/static/css/main.122a32b6.chunk.css.map",
   "index.html": "/YeezyMediaPlayer/index.html",
-  "precache-manifest.67650637147ecf7f3f4317d929d948dc.js": "/YeezyMediaPlayer/precache-manifest.67650637147ecf7f3f4317d929d948dc.js",
+  "precache-manifest.23a75cfff3860283c599f2d294618493.js": "/YeezyMediaPlayer/precache-manifest.23a75cfff3860283c599f2d294618493.js",
   "service-worker.js": "/YeezyMediaPlayer/service-worker.js"
 }

@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/YeezyMediaPlayer/static/js/runtime~main.701d9ae6.js"
   },
   {
-    "revision": "5953ef98e27bee307358",
-    "url": "/YeezyMediaPlayer/static/js/main.5953ef98.chunk.js"
+    "revision": "11129b304413f8932916",
+    "url": "/YeezyMediaPlayer/static/js/main.11129b30.chunk.js"
   },
   {
     "revision": "b6aee781202fee18e1cb",
     "url": "/YeezyMediaPlayer/static/js/1.b6aee781.chunk.js"
   },
   {
-    "revision": "5953ef98e27bee307358",
+    "revision": "11129b304413f8932916",
     "url": "/YeezyMediaPlayer/static/css/main.122a32b6.chunk.css"
   },
   {
-    "revision": "501d98803e2e6342541c054052667240",
+    "revision": "4567cfbb49abfe9fa8924004a768d3b1",
     "url": "/YeezyMediaPlayer/index.html"
   }
 ];
