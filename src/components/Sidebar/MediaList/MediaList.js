@@ -8,7 +8,7 @@ class MediaList extends React.Component {
   render() {
     const { 
       handleMediaURLChange, 
-      handleSidebarVisibilty, 
+      closeSidebar, 
       setClickedItemID, 
       clickedItemID,
       mediaListNodesToShow
@@ -32,7 +32,7 @@ class MediaList extends React.Component {
                   itemID={nodeValue+idx} 
                   itemValue={nodeValue} 
                   itemURL={nodeHrefURL} 
-                  handleSidebarVisibilty={handleSidebarVisibilty} 
+                  closeSidebar={closeSidebar} 
                   handleMediaURLChange={handleMediaURLChange}
                 />
               )

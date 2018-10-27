@@ -16,7 +16,7 @@ class MediaItem extends React.Component {
       const mediaURL = itemURL.slice(utils.CORSProxy.length)
       if (window.screen.width < 768) {
         this.props.handleMediaURLChange(mediaURL)
-        this.props.handleSidebarVisibilty(false)
+        this.props.closeSidebar()
       } else {
         this.props.handleMediaURLChange(mediaURL)
       }
@@ -59,7 +59,7 @@ class MediaItem extends React.Component {
     const {
       itemValue, 
       handleMediaURLChange, 
-      handleSidebarVisibilty, 
+      closeSidebar, 
       itemID,  
       clickedItemID, 
       setClickedItemID,
@@ -79,7 +79,7 @@ class MediaItem extends React.Component {
           mediaListNodesToShow={childrenToShow} 
           clickedItemID={clickedItemID} 
           setClickedItemID={setClickedItemID} 
-          handleSidebarVisibilty={handleSidebarVisibilty} 
+          closeSidebar={closeSidebar} 
           handleMediaURLChange={handleMediaURLChange} 
         /> }
         {showLoader && <ul><Loader forComp="mediaItem"/></ul>}
