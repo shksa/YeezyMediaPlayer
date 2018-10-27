@@ -5,42 +5,18 @@ import MediaItem from '../MediaItem/MediaItem'
 
 class MediaList extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      mediaListNodes: props.mediaListNodes,
-      mediaListNodesToShow: props.mediaListNodes
-    }
-  }
-
-  filterMediaList = (event) => {
-    const {mediaListNodes} = this.state
-    const mediaListNodesToShow = []
-    const query = event.target.value.toUpperCase()
-    for (let i = 0; i < mediaListNodes.length; i++) {
-      const node = mediaListNodes[i]
-      if (node.innerText.toUpperCase().indexOf(query) > -1) { // AnyString.indexOf("") always > -1
-        mediaListNodesToShow.push(node)
-      }
-    }
-    this.setState({mediaListNodesToShow})
-  }
-
   render() {
     const { 
       handleMediaURLChange, 
       handleSidebarVisibilty, 
-      clickedItemTracker, 
-      clickedItemID
+      setClickedItemID, 
+      clickedItemID,
+      mediaListNodesToShow
     } = this.props
-
-    const {mediaListNodes, mediaListNodesToShow} = this.state
     
-    console.log("mediaListNodes in MediaList: ", mediaListNodes)
-    console.log("mediaListNodesToShow in MediaList: ", mediaListNodesToShow)
+    // console.log("mediaListNodes in MediaList: ", mediaListNodes)
+    // console.log("mediaListNodesToShow in MediaList: ", mediaListNodesToShow)
     return (
-      <div>
-        <s.SearchBar onKeyUp={this.filterMediaList} placeholder="Search here..."/>
         <s.UnList>
           {
             mediaListNodesToShow.map((node, idx) => {
@@ -51,19 +27,18 @@ class MediaList extends React.Component {
               return (
                 <MediaItem
                   clickedItemID={clickedItemID} 
-                  itemID={nodeValue+idx} 
-                  clickedItemTracker={clickedItemTracker} 
-                  handleSidebarVisibilty={handleSidebarVisibilty} 
+                  setClickedItemID={setClickedItemID} 
                   key={nodeValue+idx} 
+                  itemID={nodeValue+idx} 
                   itemValue={nodeValue} 
                   itemURL={nodeHrefURL} 
+                  handleSidebarVisibilty={handleSidebarVisibilty} 
                   handleMediaURLChange={handleMediaURLChange}
                 />
               )
             })
           }
         </s.UnList>
-      </div>
     );
   }
 }

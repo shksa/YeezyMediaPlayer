@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader'
 import * as s from './style'
 import Sidebar from '../components/Sidebar/Sidebar';
 import MediaViewer from '../components/MediaViewer/MediaViewer'
@@ -44,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default hot(module)(App);

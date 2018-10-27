@@ -1,4 +1,4 @@
-
+import FastPriorityQueue from 'fastpriorityqueue'
 const domParser = new DOMParser()
 
 export const SampleHTML = `
@@ -55,3 +55,17 @@ export const MediaTypeToURLSourceMap = {
 }
 
 export const CORSProxy = "https://cors.io/?"
+
+export const filterList = (query, list) => {
+  query = query.toUpperCase()
+  var pq = new FastPriorityQueue((a, b) => a.indexOfQuery < b.indexOfQuery);
+  list.forEach((node) => {
+    const indexOfQuery = node.innerText.toUpperCase().indexOf(query)
+    if (indexOfQuery > -1) { // AnyString.indexOf("") always > -1
+      pq.add({node, indexOfQuery})
+    }
+  })
+  let output = []
+  pq.forEach((obj) => output.push(obj.node))
+  return output
+}

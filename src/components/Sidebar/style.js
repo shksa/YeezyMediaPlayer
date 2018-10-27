@@ -1,9 +1,10 @@
 import styled, {css} from 'styled-components';
+import { SearchBar } from '../common/common';
 export const MediaListContainer = styled.div`
   width: 30%;
   display: ${({showSidebar}) => showSidebar ? "flex" : "none" };
   flex-direction: column;
-  background-color: yellowgreen;
+  background-color: #FFFFFF;
   @media (max-width: 768px) {
     width: 85%;
     position: absolute;
@@ -36,19 +37,23 @@ export const MediaType = styled.input`
 `
 
 export const MediaSourceURLInput = styled.input`
-  margin: 10px;
-  padding: 10px;
+  margin: 0 10px 0 10px;
+  padding: 5px;
   font-size: 15px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  border-radius: 15px;
+  outline: none;
+  width: 40%;
+  align-self: center;
 `
 
 export const MediaListWrapper = styled.div`
+  margin: 10px 0 0 10px;
   flex: 1;  
   overflow: scroll;
-  ${({showLoader}) => 
-  showLoader &&
+  ${({showLoader}) => showLoader &&
   css`
     display: flex;
     justify-content: center;
@@ -56,3 +61,7 @@ export const MediaListWrapper = styled.div`
   `
   }
 `;
+
+export const ListSearchBar = styled(SearchBar)`
+
+`

@@ -8,7 +8,7 @@ import * as common from '../common/common'
 
 class Sidebar extends React.Component {
 
-  state = { mediaListNodes: null, clickedItemID: null, mediaTypeToURLSourceMap: null, mediaTypes: null, defaultMediaTypeToShow: null }
+  state = { mediaListNodes: null, mediaListNodesToShow: null, clickedItemID: null, mediaTypeToURLSourceMap: null, mediaTypes: null, defaultMediaTypeToShow: null }
 
   constructor(props) {
     super(props)
@@ -17,12 +17,10 @@ class Sidebar extends React.Component {
     this.state.defaultMediaTypeToShow = this.state.mediaTypes[0]
   }
 
-  clickedItemTracker = (clickedItemID) => {
-    this.setState({clickedItemID})
-  }
+  setClickedItemID = (clickedItemID) => {this.setState({clickedItemID})}
 
   getMedia = async(mediaSourceURL) => {
-    this.setState({mediaListNodes: null})
+    this.setState({mediaListNodes: null, mediaListNodesToShow: null})
     let html
     try {
       console.log("fetching..", mediaSourceURL)
@@ -42,7 +40,7 @@ class Sidebar extends React.Component {
     // console.log("LinkNodes after", mediaListNodes)
     
     // console.log(mediaListNodes)
-    this.setState({mediaListNodes})
+    this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
   }
 
   componentWillMount = () => {
@@ -54,7 +52,7 @@ class Sidebar extends React.Component {
 
   handleMediaTypeOnClick = (event) => {
     const mediaType = event.target.value
-    console.log(mediaType)
+    // console.log(mediaType)
     const mediaSourceURL = `${utils.CORSProxy}${this.state.mediaTypeToURLSourceMap[mediaType]}`
     this.getMedia(mediaSourceURL)
   }
@@ -67,11 +65,24 @@ class Sidebar extends React.Component {
     }
   }
 
+
+  handleListSearchBar = (event) => {
+    const query = event.target.value
+    const {mediaListNodes} = this.state
+    if (query === "") {
+      // console.log("query empty")
+      this.setState({mediaListNodesToShow: mediaListNodes})
+    } else {
+      const mediaListNodesToShow = utils.filterList(query, mediaListNodes)
+      this.setState({mediaListNodesToShow})
+    }
+  }
+
   render() {
     const {handleMediaURLChange, showSidebar, toggleSidebarVisibility, closeSidebar} = this.props
-    const {clickedItemID, mediaListNodes, mediaTypes, defaultMediaTypeToShow} = this.state
-    console.log("mediaTypes: ", mediaTypes)
-    const showLoader = mediaListNodes === null
+    const {clickedItemID, mediaListNodesToShow, mediaTypes, defaultMediaTypeToShow} = this.state
+    // console.log("mediaTypes: ", mediaTypes)
+    const showLoader = mediaListNodesToShow === null
     return (
       <s.MediaListContainer showSidebar={showSidebar}>
         <s.IconAndMediaTypeWrapper>
@@ -93,19 +104,20 @@ class Sidebar extends React.Component {
             }
           </s.MediaTypesContainer>
         </s.IconAndMediaTypeWrapper>
-        <s.MediaSourceURLInput onKeyUp={this.handleMediaSourceURLInput} placeholder="Or enter a media source URL..."/>
-        <s.MediaListWrapper showLoader={showLoader}>
-          {showLoader
-            ? <Loader />
-            : <MediaList
-                mediaListNodes={mediaListNodes} 
+        <s.MediaSourceURLInput onKeyUp={this.handleMediaSourceURLInput} placeholder="Or enter a media source URL"/>
+        {showLoader
+          ? <Loader />
+          : <s.MediaListWrapper showLoader={showLoader}>
+              <s.ListSearchBar onKeyUp={this.handleListSearchBar} placeholder="Search.." />
+              <MediaList
+                mediaListNodesToShow={mediaListNodesToShow} 
                 clickedItemID={clickedItemID} 
-                clickedItemTracker={this.clickedItemTracker} 
+                setClickedItemID={this.setClickedItemID} 
                 closeSidebar={closeSidebar}
                 handleMediaURLChange={handleMediaURLChange} 
               />
+            </s.MediaListWrapper>
           }
-        </s.MediaListWrapper>
       </s.MediaListContainer>
     );  
   }
