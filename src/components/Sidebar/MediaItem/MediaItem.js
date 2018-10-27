@@ -72,7 +72,7 @@ class MediaItem extends React.Component {
       <s.Li>
         <s.ItemAndSearchBarWrapper>
           <s.Item isClicked={clickedItemID === itemID} onClick={this.handleMediaItemClick} >{itemValueSanitized}</s.Item> {/*onClick CANNOT be on the li tag, becuase it will be called for its the children too*/}
-          <s.ItemSearchBar showSearchBar={showSearchBar} onKeyUp={this.handleItemSearchBar} placeholder="search"/>
+          <s.ItemSearchBar showSearchBar={showSearchBar} onKeyUp={this.handleItemSearchBar} placeholder="search.."/>
         </s.ItemAndSearchBarWrapper>
         {children && 
         <MediaList

@@ -27,5 +27,11 @@ export const Item = styled.p`
 export const ItemSearchBar = styled(SearchBar)`
   display: ${({showSearchBar}) => !showSearchBar && "none"};
   width: 50px;
-  padding: 4px 5px 2px 5px;
+  padding: 2px 5px 2px 5px;
+  font-size: 13px;
+  border: 2px solid white;
+  :focus {
+    border-color: #1a73e8;
+    border-radius: 15px;
+  }
 `

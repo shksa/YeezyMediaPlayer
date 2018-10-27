@@ -63,5 +63,12 @@ export const MediaListWrapper = styled.div`
 `;
 
 export const ListSearchBar = styled(SearchBar)`
-
+  width: 100px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 2px solid;
+  border-color: black;
+  :focus {
+    border-color: #1a73e8;
+  }
 `

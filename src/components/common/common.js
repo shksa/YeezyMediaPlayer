@@ -7,18 +7,10 @@ export const MenuIcon = styled.i`
 `
 
 export const SearchBar = styled.input`
-  width: 100px;
   padding: 5px;
-  font-size: 15px;
   background-color: transparent;
   color: black;
-  border: none;
-  border-bottom: 2px solid;
   outline: none;
-
-  :focus {
-    border-color: #1a73e8;
-  }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: black;
