@@ -34,16 +34,17 @@ export const GetLinkNodes = (mediaListHTML, mediaSourceURL) => {
 }
 
 export class HttpError extends Error {
-  name = "HTTPError"
   constructor(statusCode, statusText) {
-    super(statusText)
+    const message = `StatusCode: ${statusCode}, StatusText: ${statusText}`
+    super(message)
+    this.message = message
     this.statusCode = statusCode
     this.statusText = statusText
   }
 }
 
 export const FetchHtml = async(url, delay = 0) => {
-  const response = await fetch(url).then(resp => new Promise(resolve => setTimeout(resolve, delay, resp)))
+  const response = await fetch(url) //.then(resp => new Promise(resolve => setTimeout(resolve, delay, resp)))
   if(!response.ok) { // response.ok is false for responses with non 200-299 status codes.
     throw new HttpError(response.status, response.statusText)
   }

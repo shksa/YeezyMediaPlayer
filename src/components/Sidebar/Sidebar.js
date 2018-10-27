@@ -8,7 +8,15 @@ import * as common from '../common/common'
 
 class Sidebar extends React.Component {
 
-  state = { mediaListNodes: null, mediaListNodesToShow: null, clickedItemID: null, mediaTypeToURLSourceMap: null, mediaTypes: null, defaultMediaTypeToShow: null }
+  state = {
+    showErrorMsg: false,
+    mediaListNodes: null, 
+    mediaListNodesToShow: null, 
+    clickedItemID: null, 
+    mediaTypeToURLSourceMap: null, 
+    mediaTypes: null, 
+    defaultMediaTypeToShow: null 
+  }
 
   constructor(props) {
     super(props)
@@ -20,24 +28,23 @@ class Sidebar extends React.Component {
   setClickedItemID = (clickedItemID) => {this.setState({clickedItemID})}
 
   getMedia = async(mediaSourceURL) => {
-    this.setState({mediaListNodes: null, mediaListNodesToShow: null})
-    let html
+    this.setState({showLoader: true, mediaListNodes: null, mediaListNodesToShow: null})
     try {
       console.log("fetching..", mediaSourceURL)
-      html = await utils.FetchHtml(mediaSourceURL)
+      const html = await utils.FetchHtml(mediaSourceURL)
+      console.log("parsing..")
+      const mediaListNodes = utils.GetLinkNodes(html, mediaSourceURL)
+      console.log("rendering..")
+      // console.log("mediaListNodes: ", mediaListNodes)
+      this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes, showErrorMsg: false})
     } catch (error) {
       if (error instanceof utils.HttpError){
-        alert(error)
-        return
+        console.error(error)
       } else {
-        alert(error)
-        html = utils.SampleHTML
+        console.error(error)
       }
+      this.setState({showErrorMsg: true})
     }
-    const mediaListNodes = utils.GetLinkNodes(html, mediaSourceURL)
-    
-    // console.log("mediaListNodes: ", mediaListNodes)
-    this.setState({mediaListNodes, mediaListNodesToShow: mediaListNodes})
   }
 
   componentWillMount = () => {
@@ -49,7 +56,6 @@ class Sidebar extends React.Component {
 
   handleMediaTypeOnClick = (event) => {
     const mediaType = event.target.value
-    // console.log(mediaType)
     const mediaSourceURL = `${utils.CORSProxy}${this.state.mediaTypeToURLSourceMap[mediaType]}`
     this.getMedia(mediaSourceURL)
   }
@@ -67,18 +73,17 @@ class Sidebar extends React.Component {
     const query = event.target.value
     const {mediaListNodes} = this.state
     if (query === "") {
-      // console.log("query empty")
       this.setState({mediaListNodesToShow: mediaListNodes})
     } else {
       const mediaListNodesToShow = utils.filterList(query, mediaListNodes)
       this.setState({mediaListNodesToShow})
     }
   }
-
+  
   render() {
     const {handleMediaURLChange, showSidebar, toggleSidebarVisibility, closeSidebar} = this.props
-    const {clickedItemID, mediaListNodesToShow, mediaTypes, defaultMediaTypeToShow} = this.state
-    // console.log("mediaTypes: ", mediaTypes)
+    const {clickedItemID, mediaListNodesToShow, mediaTypes, defaultMediaTypeToShow, showErrorMsg} = this.state
+    // console.log("mediaListNodesToShow", mediaListNodesToShow)
     const showLoader = mediaListNodesToShow === null
     return (
       <s.MediaListContainer showSidebar={showSidebar}>
@@ -103,8 +108,14 @@ class Sidebar extends React.Component {
         </s.IconAndMediaTypeWrapper>
         <s.MediaSourceURLInput onKeyUp={this.handleMediaSourceURLInput} placeholder="Or enter a media source URL"/>
         {showLoader
-          ? <Loader />
-          : <s.MediaListWrapper showLoader={showLoader}>
+          ? 
+          <Loader />
+          : 
+          (showErrorMsg
+            ? 
+            <p style={{color: "#1a73e8"}}>There seems to be a problem with the link, Check again at a later time.</p>
+            : 
+            <s.MediaListWrapper showLoader={showLoader}>
               <s.ListSearchBar onKeyUp={this.handleListSearchBar} placeholder="Search.." />
               <MediaList
                 mediaListNodesToShow={mediaListNodesToShow} 
@@ -114,7 +125,8 @@ class Sidebar extends React.Component {
                 handleMediaURLChange={handleMediaURLChange} 
               />
             </s.MediaListWrapper>
-          }
+          )
+        }
       </s.MediaListContainer>
     );  
   }
