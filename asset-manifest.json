@@ -1,14 +1,14 @@
 {
-  "main.css": "/YeezyMediaPlayer/static/css/main.122a32b6.chunk.css",
-  "main.js": "/YeezyMediaPlayer/static/js/main.11129b30.chunk.js",
-  "main.js.map": "/YeezyMediaPlayer/static/js/main.11129b30.chunk.js.map",
-  "static/js/1.b6aee781.chunk.js": "/YeezyMediaPlayer/static/js/1.b6aee781.chunk.js",
-  "static/js/1.b6aee781.chunk.js.map": "/YeezyMediaPlayer/static/js/1.b6aee781.chunk.js.map",
+  "main.css": "/YeezyMediaPlayer/static/css/main.b8cf586f.chunk.css",
+  "main.js": "/YeezyMediaPlayer/static/js/main.e4a4c5a9.chunk.js",
+  "main.js.map": "/YeezyMediaPlayer/static/js/main.e4a4c5a9.chunk.js.map",
+  "static/js/1.5aabc4d7.chunk.js": "/YeezyMediaPlayer/static/js/1.5aabc4d7.chunk.js",
+  "static/js/1.5aabc4d7.chunk.js.map": "/YeezyMediaPlayer/static/js/1.5aabc4d7.chunk.js.map",
   "runtime~main.js": "/YeezyMediaPlayer/static/js/runtime~main.701d9ae6.js",
   "runtime~main.js.map": "/YeezyMediaPlayer/static/js/runtime~main.701d9ae6.js.map",
   "static/media/spinner.svg": "/YeezyMediaPlayer/static/media/spinner.c49febc4.svg",
-  "static/css/main.122a32b6.chunk.css.map": "/YeezyMediaPlayer/static/css/main.122a32b6.chunk.css.map",
+  "static/css/main.b8cf586f.chunk.css.map": "/YeezyMediaPlayer/static/css/main.b8cf586f.chunk.css.map",
   "index.html": "/YeezyMediaPlayer/index.html",
-  "precache-manifest.23a75cfff3860283c599f2d294618493.js": "/YeezyMediaPlayer/precache-manifest.23a75cfff3860283c599f2d294618493.js",
+  "precache-manifest.66578dabca6a114301c4d7839ef4852e.js": "/YeezyMediaPlayer/precache-manifest.66578dabca6a114301c4d7839ef4852e.js",
   "service-worker.js": "/YeezyMediaPlayer/service-worker.js"
 }
