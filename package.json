@@ -55,7 +55,7 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.2"
   },
-  "homepage": "/YeezyMediaPlayer",
+  "homepage": ".",
   "scripts": {
     "predeployToGH": "yarn build",
     "deployToGH": "gh-pages -d build",
